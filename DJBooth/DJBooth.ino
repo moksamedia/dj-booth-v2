@@ -1,98 +1,196 @@
-//
-// DJBooth
-//
-// Description of the project
-// Developed with [embedXcode](http://embedXcode.weebly.com)
-//
-// Author 		Andrew Hughes
-// 				Andrew Hughes
-//
-// Date			4/26/15 5:21 PM
-// Version		<#version#>
-//
-// Copyright	© Andrew Hughes, 2015
-// Licence		<#license#>
-//
-// See         ReadMe.txt for references
-//
-
-
-// Core library for code-sense - IDE-based
-#if defined(WIRING) // Wiring specific
-#include "Wiring.h"
-#elif defined(MAPLE_IDE) // Maple specific
-#include "WProgram.h"
-#elif defined(MPIDE) // chipKIT specific
-#include "WProgram.h"
-#elif defined(DIGISPARK) // Digispark specific
 #include "Arduino.h"
-#elif defined(ENERGIA) // LaunchPad specific
-#include "Energia.h"
-#elif defined(LITTLEROBOTFRIENDS) // LittleRobotFriends specific
-#include "LRF.h"
-#elif defined(MICRODUINO) // Microduino specific
-#include "Arduino.h"
-#elif defined(TEENSYDUINO) // Teensy specific
-#include "Arduino.h"
-#elif defined(REDBEARLAB) // RedBearLab specific
-#include "Arduino.h"
-#elif defined(SPARK) // Spark specific
-#include "application.h"
-#elif defined(ARDUINO) // Arduino 1.0 and 1.5 specific
-#include "Arduino.h"
-#else // error
-#error Platform not defined
-#endif // end IDE
+#include <ArduinoUnit.h>
+#include "MicroColor.h"
+#include "constants.h"
+#include "LedDisplay.h"
+#include "UpAndDown.h"
+#include "NightRider.h"
+#include "Interp.h"
+#include "ColorShiftingScroller.h"
+#include "AnimationPool.h"
+#include "PushButton.h"
 
-// Include application, user and local libraries
+//#define TESTING
 
+#ifndef TESTING
 
-// Define variables and constants
-//
-// Brief	Name of the LED
-// Details	Each board has a LED but connected to a different pin
-//
-uint8_t myLED;
+////////////////////////////////////////////////////////////////////////////////////
 
+LedDisplay display;
 
-//
-// Brief	Setup
-// Details	Define the pin the LED is connected to
-//
-// Add setup code
+#define MAX_CYCLE_DELAY 500000
+
+NightRider nightRider(30, &display);
+
+ColorShiftingScroller colorShiftingScroller(&display);
+
+AnimationPool animationPool(2);
+
+Animation * currentAnimation;
+
+PushButton * nextAnimationButton;
+
+bool button2toggle = false;
+bool readButton2() {
+    nextAnimationButton->state();
+}
+
+int readKnob1() {
+    return analogRead(17);
+}
+
+int readKnob2() {
+    return analogRead(18);
+}
+
+int getCycleDelayMicros() {
+    int val = readKnob2();
+    Serial.print("Knob2 = ");Serial.println(val);
+    val = Interp::SLOWACC(4, 0, 1024, 1024, val);
+    int dly = int(((float)val / 1024.0) * (float)MAX_CYCLE_DELAY);
+    return dly;
+}
+
+double getBrightness() {
+    int val = readKnob1();
+    Serial.print("Knob1 = ");Serial.println(val);
+    val = Interp::SLOWACC(2, 0, 1024, 1024, val);
+    return (double)val / 1024;
+}
+
 void setup() {
-    // myLED pin number
-#if defined(ENERGIA) // All LaunchPads supported by Energia
-    myLED = RED_LED;
-#elif defined(DIGISPARK) // Digispark specific
-    myLED = 1; // assuming model A
-#elif defined(MAPLE_IDE) // Maple specific
-    myLED = BOARD_LED_PIN;
-#elif defined(WIRING) // Wiring specific
-    myLED = 15;
-#elif defined(LITTLEROBOTFRIENDS) // LittleRobotFriends specific
-    myLED = 10;
-#elif defined(SPARK) // Spark specific
-    myLED = D7;
-#elif defined(PANSTAMP_AVR) // panStamp AVR specific
-    myLED = 7;
-#elif defined(PANSTAMP_NRG) // panStamp NRG specific
-    myLED = ONBOARD_LED;
-#else // Arduino, chipKIT, Teensy specific
-    myLED = 13;
-#endif
     
-    pinMode(myLED, OUTPUT);
+    nextAnimationButton = new PushButton(19);
+    
+    animationPool.addAnimation(&nightRider,0);
+    animationPool.addAnimation(&colorShiftingScroller,1);
+
+    currentAnimation = animationPool.getNextAnimation();
+
+    pinMode(0,INPUT_PULLUP);
+    pinMode(1, OUTPUT);
+    digitalWrite(1, HIGH);
+    pinMode(19, INPUT_PULLUP);
+
 }
 
-//
-// Brief	Loop
-// Details	Blink the LED
-//
-// Add loop code
+unsigned long previousMicros = 0;
+unsigned long cycleDelayMicros = 5;
+
 void loop() {
-    digitalWrite(myLED, HIGH);
-    delay(500);
-    digitalWrite(myLED, LOW);
-    delay(500);
+    
+    cycleDelayMicros = getCycleDelayMicros() + currentAnimation->getAdditionalDelayMicros();
+
+    currentAnimation->animate();
+    
+    double brightness = getBrightness();
+    display.setBrightness(brightness);
+    
+    display.show();
+
+    delayMicroseconds(cycleDelayMicros);
+    
+    if (readButton2()) {
+        currentAnimation = animationPool.getNextAnimation();
+    }
+    
+    
+    /*
+     unsigned long currentMicros = micros();
+
+    Serial.print("currentMicros = ");Serial.print(currentMicros);Serial.print(", previousMicros = ");Serial.print(previousMicros);Serial.print(", cycleDelayMicros = ");Serial.println(cycleDelayMicros);
+    
+    if(currentMicros - previousMicros > cycleDelayMicros) {
+        previousMicros = currentMicros;
+        currentAnimation->animate();
+        double brightness = getBrightness();
+        display.setBrightness(brightness);
+        display.show();
+        Serial.println("Showing ...");
+    }
+    else {
+        Serial.println("Skipping...");
+    }
+    */
+    
 }
+
+#else
+
+test(Limit) {
+    byte v = 10;
+    v = Limit<byte>(v, 0, 11);
+    assertEqual(v, 10);
+    v = Limit<byte>(v, 5, 8);
+    assertEqual(v, 8);
+    v = 0;
+    v = Limit<byte>(v, 22, 0xFF);
+    assertEqual(v, 22);
+}
+
+test(MicroColor1)
+{
+    MicroColor mc((uint32_t)0xFFFFFF);
+    assertEqual(mc.rgb.r, 0xFF);
+    assertEqual(mc.rgb.g, 0xFF);
+    assertEqual(mc.rgb.b, 0xFF);
+    
+    mc.setColor((uint32_t)0);
+    assertEqual(mc.rgb.r, 0);
+    assertEqual(mc.rgb.g, 0);
+    assertEqual(mc.rgb.b, 0);
+
+    mc.setColor((uint32_t)0xA1B1CC);
+    assertEqual(mc.rgb.r, 0xA1);
+    assertEqual(mc.rgb.g, 0xB1);
+    assertEqual(mc.rgb.b, 0xCC);
+
+}
+
+test(UpAndDown) {
+    
+    UpAndDown ud(0,10);
+    
+    assertEqual(ud.getNext(), 0);
+    assertEqual(ud.getNext(), 1);
+    assertEqual(ud.getNext(), 2);
+    assertEqual(ud.getNext(), 3);
+    assertEqual(ud.getNext(), 4);
+    assertEqual(ud.getNext(), 5);
+    assertEqual(ud.getNext(), 6);
+    assertEqual(ud.getNext(), 7);
+    assertEqual(ud.getNext(), 8);
+    assertEqual(ud.getNext(), 9);
+    assertEqual(ud.goingDown, false);
+    assertEqual(ud.getNext(), 10);
+    assertEqual(ud.getNext(), 9);
+    assertEqual(ud.goingDown, true);
+    assertEqual(ud.getNext(), 8);
+    assertEqual(ud.getNext(), 7);
+    assertEqual(ud.getNext(), 6);
+    assertEqual(ud.getNext(), 5);
+    assertEqual(ud.getNext(), 4);
+    assertEqual(ud.getNext(), 3);
+    assertEqual(ud.getNext(), 2);
+    assertEqual(ud.getNext(), 1);
+    assertEqual(ud.hasLooped, false);
+    assertEqual(ud.getNext(), 0);
+    assertEqual(ud.hasLooped, true);
+    
+}
+
+void setup()
+{
+    Serial.begin(9600);
+    while(!Serial); // for the Arduino Leonardo/Micro only
+    Serial.println("Running...");
+}
+
+void loop()
+{
+    Test::min_verbosity |= TEST_VERBOSITY_ASSERTIONS_ALL;
+    Test::run();
+    delay(5000);
+}
+
+#endif

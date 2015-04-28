@@ -21,10 +21,15 @@
 # List application Arduino/chipKIT/Digispark/Energia/Maple/Microduino/Teensy/Wiring libraries here
 # default = 0 = none
 #
+# ARDUINO = EEPROM SoftwareSerial SPI Wire Bridge Esplora 
+#	Ethernet Firmata GSM LiquidCrystal Robot_Control Robot_Motor 
+#	RobotIRremote SD Servo SpacebrewYun Stepper Temboo TFT WiFi 
+#
 APP_LIBS_LIST = 0
 
 # List user's libraries here 
 # default = 0 = none
+#
 #
 USER_LIBS_LIST = 0
 
@@ -76,5 +81,8 @@ PROJECT_NAME_AS_IDENTIFIER = DJBooth
 MAKEFILE_PATH  = $(CURRENT_DIR)/Makefiles
 UTILITIES_PATH = $(CURRENT_DIR)/Utilities
 
+AVRDUDE_NO_SERIAL_PORT = 1
+
 include $(MAKEFILE_PATH)/Step1.mk
+
 
