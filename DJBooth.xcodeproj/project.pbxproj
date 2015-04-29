@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		471557B01AEDAA9400727572 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 471557AF1AEDAA9400727572 /* main.cpp */; };
-		471557B51AEDAA9400727572 /* LocalLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 471557B41AEDAA9400727572 /* LocalLibrary.cpp */; };
 		4715583F1AEDAB6200727572 /* RGBConverter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4715583B1AEDAB6200727572 /* RGBConverter.cpp */; };
 		471558401AEDAB6200727572 /* MicroColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4715583D1AEDAB6200727572 /* MicroColor.cpp */; };
 		471558451AEDC3B700727572 /* Limit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 471558431AEDC3B700727572 /* Limit.cpp */; };
@@ -20,8 +19,9 @@
 		4715585D1AEDFA9F00727572 /* ColorShiftingScroller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4715585B1AEDFA9F00727572 /* ColorShiftingScroller.cpp */; };
 		471558601AEE0E3A00727572 /* AnimationPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4715585E1AEE0E3A00727572 /* AnimationPool.cpp */; };
 		471558671AEE1DE100727572 /* PushButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 471558651AEE1DE100727572 /* PushButton.cpp */; };
-		472557B61AEDAA9400727572 /* LocalLibrary.h in Sources */ = {isa = PBXBuildFile; fileRef = 471557B61AEDAA9400727572 /* LocalLibrary.h */; };
 		472558241AEDAA9500727572 /* DJBooth.ino in Sources */ = {isa = PBXBuildFile; fileRef = 471558241AEDAA9500727572 /* DJBooth.ino */; };
+		475139D51AF08F0F007076FC /* ArrayAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 475139D31AF08F0F007076FC /* ArrayAnimation.cpp */; };
+		47DB855C1AF094D600140322 /* ScrollArrayAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 47DB855A1AF094D600140322 /* ScrollArrayAnimation.cpp */; };
 		AA2A150426172308AA000006 /* abi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAAA150426172308AA000006 /* abi.cpp */; };
 		AA2A150426172308AA000007 /* Arduino.h in Sources */ = {isa = PBXBuildFile; fileRef = AAAA150426172308AA000007 /* Arduino.h */; };
 		AA2A150426172308AA000008 /* binary.h in Sources */ = {isa = PBXBuildFile; fileRef = AAAA150426172308AA000008 /* binary.h */; };
@@ -418,8 +418,6 @@
 		471557AF1AEDAA9400727572 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		471557B11AEDAA9400727572 /* Makefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		471557B31AEDAA9400727572 /* ReadMe.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
-		471557B41AEDAA9400727572 /* LocalLibrary.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LocalLibrary.cpp; sourceTree = "<group>"; };
-		471557B61AEDAA9400727572 /* LocalLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalLibrary.h; sourceTree = "<group>"; };
 		471557B81AEDAA9400727572 /* Sketchbook.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = Sketchbook.txt; path = Sketchbook/Sketchbook.txt; sourceTree = "<group>"; };
 		471557BA1AEDAA9400727572 /* 4D Systems PICadillo 35T.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "4D Systems PICadillo 35T.xcconfig"; path = "Configurations/4D Systems PICadillo 35T.xcconfig"; sourceTree = "<group>"; };
 		471557BB1AEDAA9400727572 /* Adafruit Pro Trinket 3V-12MHz.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Adafruit Pro Trinket 3V-12MHz.xcconfig"; path = "Configurations/Adafruit Pro Trinket 3V-12MHz.xcconfig"; sourceTree = "<group>"; };
@@ -550,6 +548,10 @@
 		4715585F1AEE0E3A00727572 /* AnimationPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationPool.h; sourceTree = "<group>"; };
 		471558651AEE1DE100727572 /* PushButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PushButton.cpp; sourceTree = "<group>"; };
 		471558661AEE1DE100727572 /* PushButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushButton.h; sourceTree = "<group>"; };
+		475139D31AF08F0F007076FC /* ArrayAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ArrayAnimation.cpp; sourceTree = "<group>"; };
+		475139D41AF08F0F007076FC /* ArrayAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayAnimation.h; sourceTree = "<group>"; };
+		47DB855A1AF094D600140322 /* ScrollArrayAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScrollArrayAnimation.cpp; sourceTree = "<group>"; };
+		47DB855B1AF094D600140322 /* ScrollArrayAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollArrayAnimation.h; sourceTree = "<group>"; };
 		AAAA150426172308AA000006 /* abi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = abi.cpp; sourceTree = "<group>"; };
 		AAAA150426172308AA000007 /* Arduino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arduino.h; sourceTree = "<group>"; };
 		AAAA150426172308AA000008 /* binary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = binary.h; sourceTree = "<group>"; };
@@ -980,8 +982,6 @@
 				471557AF1AEDAA9400727572 /* main.cpp */,
 				471557B11AEDAA9400727572 /* Makefile */,
 				471557B31AEDAA9400727572 /* ReadMe.txt */,
-				471557B41AEDAA9400727572 /* LocalLibrary.cpp */,
-				471557B61AEDAA9400727572 /* LocalLibrary.h */,
 				471558241AEDAA9500727572 /* DJBooth.ino */,
 				471557B71AEDAA9400727572 /* Sketchbook */,
 				AAAA150426172308AA000000 /* Resources */,
@@ -1145,6 +1145,10 @@
 				4715585C1AEDFA9F00727572 /* ColorShiftingScroller.h */,
 				4715585E1AEE0E3A00727572 /* AnimationPool.cpp */,
 				4715585F1AEE0E3A00727572 /* AnimationPool.h */,
+				475139D31AF08F0F007076FC /* ArrayAnimation.cpp */,
+				475139D41AF08F0F007076FC /* ArrayAnimation.h */,
+				47DB855A1AF094D600140322 /* ScrollArrayAnimation.cpp */,
+				47DB855B1AF094D600140322 /* ScrollArrayAnimation.h */,
 			);
 			name = Animations;
 			sourceTree = "<group>";
@@ -2503,8 +2507,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				471557B01AEDAA9400727572 /* main.cpp in Sources */,
-				471557B51AEDAA9400727572 /* LocalLibrary.cpp in Sources */,
-				472557B61AEDAA9400727572 /* LocalLibrary.h in Sources */,
 				472558241AEDAA9500727572 /* DJBooth.ino in Sources */,
 				AA2A150426172308AA000006 /* abi.cpp in Sources */,
 				AA2A150426172308AA000007 /* Arduino.h in Sources */,
@@ -2546,10 +2548,12 @@
 				AA2A150426172308AA000029 /* wiring_digital.c in Sources */,
 				AA2A150426172308AA00002A /* wiring_private.h in Sources */,
 				AA2A150426172308AA00002B /* wiring_pulse.c in Sources */,
+				47DB855C1AF094D600140322 /* ScrollArrayAnimation.cpp in Sources */,
 				AA2A150426172308AA00002C /* wiring_shift.c in Sources */,
 				AA2A150426172308AA00002D /* WMath.cpp in Sources */,
 				AA2A150426172308AA00002E /* WString.cpp in Sources */,
 				AA2A150426172308AA00002F /* WString.h in Sources */,
+				475139D51AF08F0F007076FC /* ArrayAnimation.cpp in Sources */,
 				AA2A150426172308AA000032 /* EEPROM.h in Sources */,
 				AA2A150426172308AA000034 /* SoftwareSerial.cpp in Sources */,
 				AA2A150426172308AA000035 /* SoftwareSerial.h in Sources */,
